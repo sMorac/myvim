@@ -1,5 +1,9 @@
 set undolevels=1000      " use 1000 levels of undo
 set history=1000    " use 1000 levels of cmd history
+
+" Save undo's after file closes
+set undofile
+
 " adding ctrlp
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
@@ -41,8 +45,9 @@ set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
 
 " cmd completion
-set wildmode=longest,list,full
 set wildmenu
+set wildmode=longest,list,full
+set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,*.jpg,*.gif,*.png
 
 set nobackup
 set noswapfile
