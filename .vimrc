@@ -1,3 +1,6 @@
+" pathogen package manager
+execute pathogen#infect()
+
 set undolevels=1000      " use 1000 levels of undo
 set history=1000    " use 1000 levels of cmd history
 
@@ -12,7 +15,8 @@ filetype plugin on
 filetype indent on
 
 " color syntax hightlighting
-colorscheme smyck
+set background=dark
+colorscheme solarized
 syntax enable 
 
 " search
@@ -53,12 +57,6 @@ set nobackup
 set noswapfile
 :set completeopt=longest,menuone " completion settings
 
-" pathogen package manager
-execute pathogen#infect()
-
-" YouCompleteMe completion package
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-
 " adding ect files as html (ect.js templating engine)
 au BufReadPost *.ect set syntax=html
 
@@ -69,3 +67,25 @@ map k gk
 " Always show the status line
 set laststatus=2
 set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l:%c
+
+" setup for ctrl space
+set nocompatible
+set hidden
+set showtabline=0
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_javascript_checkers =['eslint']
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+" fixing trailing whitespace automatically
+autocmd BufWritePre *.py :%s/\s\+$//e
+
+nnoremap <leader>. :CtrlPTag<cr>
